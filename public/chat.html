@@ -19,10 +19,10 @@
                 <form id='message-form'>
                     <input name='message' placeholder="Message" type="text" required autocomplete="off">
 
-                    <button>send</button>
+                    <button>Send</button>
                 </form>
 
-                <button id='send-location'>Send location</button>
+                <button id='send-location'>Send Location</button>
             </div>
         </div>
         <div id="sidebar" class="chat__sidebar">
@@ -33,27 +33,28 @@
 
     <script id="message-template" type='text/html'>
         <div class="message {{style}}">
-            <p>
+            <p class="message-info">
                 <span class="message__name">{{username}}</span>
-                <span class="message__meta">>{{createdAt}}</span>
+                <span class="message__meta">{{createdAt}}</span>
             </p>
-            <p>{{message}}</p>
+            <p> <span class="text">{{message}}</span></p>
+
         </div>
     </script>
 
     <script id="location-message-template" type='text/html'>
-        <div class="message">
-            <p>
+        <div class="message {{style}}">
+            <p class="message-info">
                 <span class="message__name">{{username}}</span>
-                <span class="message__meta">>{{createdAt}}</span>
+                <span class=" message__meta">{{createdAt}}</span>
             </p>
-            <p><a href={{url}} target='_blank'>My current location</a></p>
+            <p> <span class="location-text"><a href={{url}} target='_blank'>My current location</a></span></p>
         </div>
     </script>
 
     <script id="sidebar-template" type="text/html">
-        <h2 class="room-title">{{room}}</h2>
-        <h3 class="list-title">Users</h3>
+        <h2 class="room-title">Users in {{room}}</h2>
+        <!-- <h3 class="list-title">Users</h3> -->
         <ul class="users">
             {{#users}}
             <li>{{username}}</li>

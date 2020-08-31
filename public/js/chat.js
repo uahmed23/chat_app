@@ -46,8 +46,9 @@ const autoscroll = () => {
 
 socket.on('message', (message) => {
     let style = username === message.username ? "me" : "other"
+    let displayName = username === message.username ? "" : message.username
     const html = Mustache.render(messageTemplate, {
-        username: message.username,
+        username: displayName,
         message: message.text,
         createdAt: moment(message.createdAt).format('h:mm a'),
         style
@@ -58,10 +59,13 @@ socket.on('message', (message) => {
 })
 
 socket.on('locationMessage', (locationMessage) => {
+
+    let style = username === locationMessage.username ? "me" : "other"
     const html = Mustache.render(locationMessageTemplate, {
         username: locationMessage.username,
         url: locationMessage.url,
-        createdAt: moment(locationMessage.createdAt).format('h:mm a')
+        createdAt: moment(locationMessage.createdAt).format('h:mm a'),
+        style
     })
     $messages.insertAdjacentHTML('beforeend', html)
     autoscroll()
