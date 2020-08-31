@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
 
         socket.join(user.room)
 
-        socket.emit('message', generateMessage("admin", "Welcome!"))
+        socket.emit('message', generateMessage("admin", `Welcome to room: ${user.room}`))
         socket.broadcast.to(user.room).emit('message', generateMessage("admin", `${user.username} has joined!`))
         io.to(user.room).emit('roomData', {
             room: user.room,
@@ -46,10 +46,10 @@ io.on('connection', (socket) => {
 
     socket.on('sendMessage', (message, callback) => {
 
-        const filter = new Filter()
-        if (filter.isProfane(message)) {
-            return callback('Profanity in not allowed')
-        }
+        // const filter = new Filter()
+        // if (filter.isProfane(message)) {
+        //     return callback('Profanity in not allowed')
+        // }
 
         const user = getUser(socket.id)
         io.to(user.room).emit('message', generateMessage(user.username, message))
